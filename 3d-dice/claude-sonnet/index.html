@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D骰子游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>3D骰子游戏</h1>
+        <div class="dice-container">
+            <div class="dice" id="dice">
+                <div class="face front">
+                    <div class="dot dot-center"></div>
+                </div>
+                <div class="face back">
+                    <div class="dot dot-top-left"></div>
+                    <div class="dot dot-center-left"></div>
+                    <div class="dot dot-bottom-left"></div>
+                    <div class="dot dot-top-right"></div>
+                    <div class="dot dot-center-right"></div>
+                    <div class="dot dot-bottom-right"></div>
+                </div>
+                <div class="face right">
+                    <div class="dot dot-top-left"></div>
+                    <div class="dot dot-bottom-right"></div>
+                </div>
+                <div class="face left">
+                    <div class="dot dot-top-left"></div>
+                    <div class="dot dot-center-left"></div>
+                    <div class="dot dot-bottom-left"></div>
+                    <div class="dot dot-center-right"></div>
+                </div>
+                <div class="face top">
+                    <div class="dot dot-top-left"></div>
+                    <div class="dot dot-top-right"></div>
+                    <div class="dot dot-center-left"></div>
+                    <div class="dot dot-center-right"></div>
+                    <div class="dot dot-bottom-left"></div>
+                </div>
+                <div class="face bottom">
+                    <div class="dot dot-top-left"></div>
+                    <div class="dot dot-top-right"></div>
+                    <div class="dot dot-bottom-left"></div>
+                </div>
+            </div>
+        </div>
+        <button id="rollButton" class="roll-button">投掷骰子</button>
+        <div class="result" id="result"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

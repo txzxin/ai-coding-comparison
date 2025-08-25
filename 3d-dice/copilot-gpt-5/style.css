@@ -1,0 +1,85 @@
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, PingFang SC, Microsoft YaHei, Helvetica, Arial, sans-serif;
+  background: radial-gradient(1000px 500px at 50% -20%, #fafafa, #e9eef3);
+  color: #111;
+}
+
+.app {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  place-items: center;
+  gap: 24px;
+  padding: 24px;
+}
+
+h1 { margin: 0; font-weight: 700; letter-spacing: .5px; }
+
+.scene {
+  width: 220px; height: 220px;
+  perspective: 800px;
+}
+
+.cube {
+  width: 140px; height: 140px;
+  position: relative;
+  margin: 0 auto;
+  transform-style: preserve-3d;
+  transform: translateZ(-70px);
+  transition: transform 1.2s cubic-bezier(.22,.61,.36,1);
+}
+
+.face {
+  position: absolute;
+  width: 140px; height: 140px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fff, #f4f6f9);
+  border: 1px solid #dfe6ee;
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.08),
+    inset 0 2px 0 rgba(255,255,255,.7),
+    inset 0 -2px 8px rgba(0,0,0,.06);
+  display: grid;
+  place-items: center;
+}
+
+/* 定义每个面的空间位置 */
+.front  { transform: rotateY(  0deg) translateZ(70px); }
+.back   { transform: rotateY(180deg) translateZ(70px); }
+.right  { transform: rotateY( 90deg) translateZ(70px); }
+.left   { transform: rotateY(-90deg) translateZ(70px); }
+.top    { transform: rotateX( 90deg) translateZ(70px); }
+.bottom { transform: rotateX(-90deg) translateZ(70px); }
+
+.pip {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff, #d9dee5 60%, #a9b3c3);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.8), inset 0 -1px 2px rgba(0,0,0,.2);
+  position: absolute;
+}
+
+/* 点数布局 */
+.c { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.tl { top: 24px; left: 24px; }
+.tr { top: 24px; right: 24px; }
+.ml { top: 50%; left: 24px; transform: translateY(-50%); }
+.mr { top: 50%; right: 24px; transform: translateY(-50%); }
+.bl { bottom: 24px; left: 24px; }
+.br { bottom: 24px; right: 24px; }
+
+.controls { display: flex; align-items: center; gap: 16px; }
+button {
+  padding: 10px 18px; font-size: 16px; font-weight: 600;
+  background: #0f62fe; color: #fff; border: none; border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(15,98,254,.35);
+  cursor: pointer;
+}
+button:disabled { opacity: .6; cursor: not-allowed; }
+
+.result { font-size: 18px; }
+
+/* 交互状态 */
+.cube.rolling { transition: transform 1.35s cubic-bezier(.17,.67,.2,1.05); }

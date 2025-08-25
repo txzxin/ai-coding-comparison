@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D骰子游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>3D骰子游戏</h1>
+        
+        <div class="dice-container">
+            <div class="dice" id="dice">
+                <div class="face front">
+                    <div class="dot"></div>
+                </div>
+                <div class="face back">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="face right">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="face left">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="face top">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="face bottom">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button id="rollBtn" class="roll-button">投掷骰子</button>
+            <div class="result" id="result">点击投掷开始游戏</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

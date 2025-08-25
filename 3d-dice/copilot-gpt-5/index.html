@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>3D 掷骰子</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <h1>掷骰子</h1>
+
+    <div class="scene" aria-live="polite">
+      <div class="cube" id="cube" aria-label="三维骰子" role="img">
+        <!-- 前：1 -->
+        <div class="face front" data-value="1" aria-label="1">
+          <span class="pip c"></span>
+        </div>
+        <!-- 后：6 -->
+        <div class="face back" data-value="6" aria-label="6">
+          <span class="pip tl"></span>
+          <span class="pip tr"></span>
+          <span class="pip ml"></span>
+          <span class="pip mr"></span>
+          <span class="pip bl"></span>
+          <span class="pip br"></span>
+        </div>
+        <!-- 右：3 -->
+        <div class="face right" data-value="3" aria-label="3">
+          <span class="pip tl"></span>
+          <span class="pip c"></span>
+          <span class="pip br"></span>
+        </div>
+        <!-- 左：4 -->
+        <div class="face left" data-value="4" aria-label="4">
+          <span class="pip tl"></span>
+          <span class="pip tr"></span>
+          <span class="pip bl"></span>
+          <span class="pip br"></span>
+        </div>
+        <!-- 上：5 -->
+        <div class="face top" data-value="5" aria-label="5">
+          <span class="pip tl"></span>
+          <span class="pip tr"></span>
+          <span class="pip c"></span>
+          <span class="pip bl"></span>
+          <span class="pip br"></span>
+        </div>
+        <!-- 下：2 -->
+        <div class="face bottom" data-value="2" aria-label="2">
+          <span class="pip tl"></span>
+          <span class="pip br"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="rollBtn" type="button" aria-controls="result">投掷</button>
+      <div class="result" id="resultBox">结果：<strong id="result">1</strong></div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
