@@ -18,3 +18,4 @@
 | claude-deepseek    |   ★★★      |   ★★★★     |   ★★★★     |
 | gemini-2.5-pro     |   ★★★★     |   ★★★★     |   ★★★★     |
 | copilot-gpt-5      |   ★★★★★    |   ★★★★     |   ★★★★★    |
+| copilot-grok       |   ★★★★★    |   ★★★★     |   ★★★★     |

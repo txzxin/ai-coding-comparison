@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D 骰子投掷</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>3D 骰子投掷</h1>
+        <div class="dice-container">
+            <div class="dice">
+                <div class="face front"> <!-- 1点 -->
+                    <div class="dot center"></div>
+                </div>
+                <div class="face back"> <!-- 6点 -->
+                    <div class="dot top-left"></div>
+                    <div class="dot top-right"></div>
+                    <div class="dot middle-left"></div>
+                    <div class="dot middle-right"></div>
+                    <div class="dot bottom-left"></div>
+                    <div class="dot bottom-right"></div>
+                </div>
+                <div class="face right"> <!-- 3点 -->
+                    <div class="dot top-right"></div>
+                    <div class="dot center"></div>
+                    <div class="dot bottom-left"></div>
+                </div>
+                <div class="face left"> <!-- 4点 -->
+                    <div class="dot top-left"></div>
+                    <div class="dot top-right"></div>
+                    <div class="dot bottom-left"></div>
+                    <div class="dot bottom-right"></div>
+                </div>
+                <div class="face top"> <!-- 2点 -->
+                    <div class="dot top-left"></div>
+                    <div class="dot bottom-right"></div>
+                </div>
+                <div class="face bottom"> <!-- 5点 -->
+                    <div class="dot top-left"></div>
+                    <div class="dot top-right"></div>
+                    <div class="dot center"></div>
+                    <div class="dot bottom-left"></div>
+                    <div class="dot bottom-right"></div>
+                </div>
+            </div>
+        </div>
+        <button id="roll-btn">投掷骰子</button>
+        <div id="result">结果：未投掷</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

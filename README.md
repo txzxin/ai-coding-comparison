@@ -10,6 +10,7 @@
 - Claude Code (deepseek-v3.1)
 - Gemini CLI (gemini-2.5-pro)
 - VS Code GitHub Copilot (GPT-5)
+- VS Code GitHub Copilot (grok-code-fast-1)
 
 ## 案例列表
 
