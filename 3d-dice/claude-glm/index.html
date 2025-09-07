@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D骰子投掷器</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            perspective: 1000px;
+        }
+
+        .dice-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 50px auto;
+            transform-style: preserve-3d;
+            transition: transform 2s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .dice {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            transform-style: preserve-3d;
+        }
+
+        .face {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: #fff;
+            border: 2px solid #333;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .face::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #f0f0f0 0%, #ffffff 100%);
+        }
+
+        .dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #333;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .face1 { transform: rotateY(0deg) translateZ(60px); }
+        .face2 { transform: rotateY(90deg) translateZ(60px); }
+        .face3 { transform: rotateY(180deg) translateZ(60px); }
+        .face4 { transform: rotateY(-90deg) translateZ(60px); }
+        .face5 { transform: rotateX(90deg) translateZ(60px); }
+        .face6 { transform: rotateX(-90deg) translateZ(60px); }
+
+        .face1 .dot:nth-child(1) { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+        .face2 .dot:nth-child(1) { top: 25%; left: 25%; }
+        .face2 .dot:nth-child(2) { bottom: 25%; right: 25%; }
+
+        .face3 .dot:nth-child(1) { top: 25%; left: 25%; }
+        .face3 .dot:nth-child(2) { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .face3 .dot:nth-child(3) { bottom: 25%; right: 25%; }
+
+        .face4 .dot:nth-child(1) { top: 25%; left: 25%; }
+        .face4 .dot:nth-child(2) { top: 25%; right: 25%; }
+        .face4 .dot:nth-child(3) { bottom: 25%; left: 25%; }
+        .face4 .dot:nth-child(4) { bottom: 25%; right: 25%; }
+
+        .face5 .dot:nth-child(1) { top: 25%; left: 25%; }
+        .face5 .dot:nth-child(2) { top: 25%; right: 25%; }
+        .face5 .dot:nth-child(3) { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .face5 .dot:nth-child(4) { bottom: 25%; left: 25%; }
+        .face5 .dot:nth-child(5) { bottom: 25%; right: 25%; }
+
+        .face6 .dot:nth-child(1) { top: 25%; left: 25%; }
+        .face6 .dot:nth-child(2) { top: 25%; right: 25%; }
+        .face6 .dot:nth-child(3) { top: 50%; left: 25%; transform: translateY(-50%); }
+        .face6 .dot:nth-child(4) { top: 50%; right: 25%; transform: translateY(-50%); }
+        .face6 .dot:nth-child(5) { bottom: 25%; left: 25%; }
+        .face6 .dot:nth-child(6) { bottom: 25%; right: 25%; }
+
+        .roll-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .roll-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .roll-button:active {
+            transform: translateY(0);
+        }
+
+        .roll-button:disabled {
+            background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result {
+            margin-top: 30px;
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .result.show {
+            opacity: 1;
+        }
+
+        .title {
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+        }
+
+        @keyframes roll {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            25% { transform: rotateX(720deg) rotateY(360deg); }
+            50% { transform: rotateX(1440deg) rotateY(720deg); }
+            75% { transform: rotateX(2160deg) rotateY(1080deg); }
+            100% { transform: rotateX(2880deg) rotateY(1440deg); }
+        }
+
+        .rolling {
+            animation: roll 2s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">3D骰子投掷器</h1>
+        
+        <div class="dice-container" id="diceContainer">
+            <div class="dice" id="dice">
+                <div class="face face1">
+                    <div class="dot"></div>
+                </div>
+                <div class="face face2">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="face face3">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="face face4">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="face face5">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="face face6">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="roll-button" id="rollButton">投掷骰子</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        const diceContainer = document.getElementById('diceContainer');
+        const dice = document.getElementById('dice');
+        const rollButton = document.getElementById('rollButton');
+        const result = document.getElementById('result');
+
+        const faceRotations = {
+            1: { x: 0, y: 0 },
+            2: { x: 0, y: -90 },
+            3: { x: 0, y: -180 },
+            4: { x: 0, y: 90 },
+            5: { x: -90, y: 0 },
+            6: { x: 90, y: 0 }
+        };
+
+        let isRolling = false;
+
+        function getRandomNumber() {
+            return Math.floor(Math.random() * 6) + 1;
+        }
+
+        function rollDice() {
+            if (isRolling) return;
+            
+            isRolling = true;
+            rollButton.disabled = true;
+            result.classList.remove('show');
+            
+            const finalNumber = getRandomNumber();
+            const finalRotation = faceRotations[finalNumber];
+            
+            dice.classList.add('rolling');
+            
+            setTimeout(() => {
+                dice.classList.remove('rolling');
+                diceContainer.style.transform = `rotateX(${finalRotation.x}deg) rotateY(${finalRotation.y}deg)`;
+                
+                setTimeout(() => {
+                    result.textContent = `投掷结果: ${finalNumber} 点`;
+                    result.classList.add('show');
+                    rollButton.disabled = false;
+                    isRolling = false;
+                }, 500);
+            }, 2000);
+        }
+
+        rollButton.addEventListener('click', rollDice);
+        
+        diceContainer.style.transform = `rotateX(${faceRotations[1].x}deg) rotateY(${faceRotations[1].y}deg)`;
+    </script>
+</body>
+</html>

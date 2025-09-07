@@ -16,6 +16,7 @@
 | claude-opus        |   ★★★★★    |   ★★★★★    |   ★★★★     |
 | claude-opus-plan   |   ★★       |   ★★★★★    |   ★★★★     |
 | claude-deepseek    |   ★★★      |   ★★★★     |   ★★★★     |
+| claude-glm-4.5     |   ★★★★★    |   ★★★★★    |   ★★★★     |
 | gemini-2.5-pro     |   ★★★★     |   ★★★★     |   ★★★★     |
 | copilot-gpt-5      |   ★★★★★    |   ★★★★     |   ★★★★★    |
 | copilot-grok       |   ★★★★★    |   ★★★★     |   ★★★★     |

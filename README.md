@@ -8,6 +8,7 @@
 - Claude Code (claude-opus-4-1-20250805)
 - Claude Code (opus plan mode)
 - Claude Code (deepseek-v3.1)
+- Claude Code (glm-4.5)
 - Gemini CLI (gemini-2.5-pro)
 - VS Code GitHub Copilot (GPT-5)
 - VS Code GitHub Copilot (grok-code-fast-1)
